@@ -1,0 +1,14 @@
+<html>
+    <head><title><%= title %></title></head>
+    <body>
+        <h1>Contact Details Page</h1>
+        <div>
+            <% if(contact) { %>
+            <h3><%= contact.email %></h3>
+            <p><%= contact.message %></p>
+            <% } else { %>
+                <h3>Contact details not found!</h3>
+            <% } %>
+        </div>
+    </body>
+</html>

@@ -78,6 +78,23 @@ app.post('/contact', (req, res) => {
     res.redirect('/')
 })
 
+app.get('/contact/:id', (req, res) => {
+    
+    const contactId = req.params.id
+    console.log(typeof contactId)
+
+    const arr = JSON.parse(fs.readFileSync('fakedb.json').toString())
+
+    const index = arr.findIndex((obj) => obj.id === Number(contactId))
+    
+    if(index < 0) {
+        res.render('contact-details', {title: 'Contact Details', contact: null})
+    } else {
+        const contactObj = arr[index]
+        res.render('contact-details', {title: 'Contact Details', contact: contactObj})
+    }
+})
+
 app.use((req, res) => {
     res.status(404).render('404', {title: 'Resource not found'}) // express don't know this is 404 as such we have to set status manually
 })
