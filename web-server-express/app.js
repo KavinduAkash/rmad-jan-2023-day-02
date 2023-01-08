@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require('fs')
 
 const app = express() // express app: create express instance
 
@@ -68,7 +69,12 @@ app.get('/contact', (req, res) => {
 
 app.post('/contact', (req, res) => {
     console.log(req.body)
-    res.render('career', {title: 'Career', vacancies: vacancies})
+    const arr = JSON.parse(fs.readFileSync('fakedb.json').toString())
+    let body = req.body
+    body.id = arr.length + 1
+    arr.push(body)
+    fs.writeFileSync('fakedb.json', JSON.stringify(arr))
+    res.redirect('/')
 })
 
 app.use((req, res) => {
