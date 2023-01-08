@@ -1,0 +1,13 @@
+<html>
+    <head><title><%= title %></title></head>
+    <body>
+        <h1>Career Page</h1>
+        <div>
+           <% if(vacancies.length > 0) { %>
+            <% vacancies.forEach(vacancie => { %>
+                <div><h3><%= vacancie.position %></h3><h5><%= vacancie.company %></h5><p><%= vacancie.description %></p><hr></div>
+            <% })%>
+            <% }%>
+        </div>
+    </body>
+</html>
