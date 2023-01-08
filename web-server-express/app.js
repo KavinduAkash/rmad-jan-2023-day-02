@@ -4,6 +4,8 @@ const app = express() // express app: create express instance
 
 app.set('view engine', 'ejs')
 
+app.use(express.urlencoded({extends: true}))
+
 app.listen(3000)
 
 console.log('__dirname:',__dirname)
@@ -58,6 +60,15 @@ app.get('/career', (req, res) => {
 
 app.get('/career-2023', (req, res) => {
     res.redirect('/career')
+})
+
+app.get('/contact', (req, res) => {
+    res.render('contact', {title: 'Contact'})
+})
+
+app.post('/contact', (req, res) => {
+    console.log(req.body)
+    res.render('career', {title: 'Career', vacancies: vacancies})
 })
 
 app.use((req, res) => {
