@@ -11,5 +11,13 @@
                 <input type="submit">
             </form>
         </p>
+        <hr>
+        <div>
+            <% if(contacts.length > 0) { %>
+                <% contacts.forEach(contact => { %>
+                    <div><h3><%= contact.email %></h3><p><%= contact.message %></p><hr></div>
+                <% })%>
+                <% }%>
+        </div>
     </body>
 </html>

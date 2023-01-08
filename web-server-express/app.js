@@ -64,7 +64,8 @@ app.get('/career-2023', (req, res) => {
 })
 
 app.get('/contact', (req, res) => {
-    res.render('contact', {title: 'Contact'})
+    const arr = JSON.parse(fs.readFileSync('fakedb.json').toString())
+    res.render('contact', {title: 'Contact', contacts: arr})
 })
 
 app.post('/contact', (req, res) => {
