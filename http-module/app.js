@@ -40,18 +40,52 @@ const server = http.createServer((req, res) => {
     // })
 
     // send files - html
-    res.setHeader('Content-Type', 'text/html')
-    fs.readFile('index.html', (err, data) => {
-        if(err) {
-            console.log('unable to read the file!')
-            res.end()
-        } else {
-            res.write(data)
-            res.end()
-        }
-    })
+    // res.setHeader('Content-Type', 'text/html')
+    // fs.readFile('index.html', (err, data) => {
+    //     if(err) {
+    //         console.log('unable to read the file!')
+    //         res.end()
+    //     } else {
+    //         res.write(data)
+    //         res.end()
+    //     }
+    // })
 
     // res.end()
+
+    let pagePath = "./views"
+
+    switch(req.url) {
+        case '/':
+            pagePath += '/index.html'
+            break
+        case '/about':
+            pagePath += '/about.html'
+            break
+        case '/career':
+            pagePath += '/career.html'
+            break
+        case '/career-2023':
+            res.setHeader('Location', '/career')
+            res.statusCode = 301
+            break    
+        default:
+            pagePath += '/404.html'
+            res.statusCode = 404
+            break     
+        
+    }
+
+    fs.readFile(pagePath, (err, data) => {
+        if(err) {
+            console.log(err)
+            res.end()
+        } else {
+            // res.write(data)
+            res.end(data)
+        }
+    }) 
+
 })
 
 server.listen(3000, 'localhost', () => {
